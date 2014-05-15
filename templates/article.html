@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block title %}{{ article.title|striptags }} // {{ super() }}{% endblock title%}
+{% block head_css %}
+	<!-- if need css, put here -->
+{% endblock %}
+{% block head_js %}
+	<!-- if need js, put here -->
+{% endblock %}
+{% block content %}
+<article class="type-system-geometric">
+{% include 'article_content.html' %}
+{% if ETSY_API_KEY or ENVY_API_KEY %}
+    {% include 'item.html' %}
+{% endif %}
+<hr>
+{% include 'share.html' %}
+{% if DISQUS_SITENAME %}
+	{% include 'disqus.html' %}
+{% endif %}
+</article>
+{% include 'footer.html' %}
+{% endblock %}

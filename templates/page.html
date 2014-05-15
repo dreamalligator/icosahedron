@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block title %}{{ page.title|striptags }} // {{ super() }}{% endblock title %}
+
+{% block content %}
+<article class="type-system-geometric">
+  <a href="{{ SITEURL }}"><img class="top-icon" src="{{ SITEURL }}/theme/images/icosahedron.png" alt="icosahedron"></a>
+  {% set this_title = page.title %}
+  <p class="type"><a href="{{ SITEURL}}/pages/{{page.slug}}.html">{{ page.title|title }}</a></p>
+  {% for page in PAGES %}
+    {% if page.title != this_title %}
+      <p class="type"><a href="{{ SITEURL}}/pages/{{page.slug}}.html">{{ page.title|title }}</a></p>
+    {% endif %}
+  {% endfor %}
+  {% if page.subtitle %}
+    <h1>{{ page.subtitle|title }}</h1>
+  {% endif %}
+  <h2>{{ page.summary }}</h2>
+  {% if page.image %}
+    <img class="meta-img" src="{{ SITEURL }}/images/{{ page.image }}" alt="{{ page.title }}">
+  {% endif %}
+  <p class="date">{{ page.locale_date }}</p>
+  <p>{{ page.content }}</p>
+  <hr>
+  <p class="author">{% if page.author %}{{ page.author }}{% else %}{{ AUTHOR }}{% endif %}</p>
+  <hr>
+</article>
+{% if ETSY_API_KEY or ENVY_API_KEY %}
+    {% include 'shop.html' %}
+{% endif %}
+{% include 'disqus.html' %}
+{% include 'footer.html' %}
+{% endblock %}

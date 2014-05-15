@@ -1,0 +1,552 @@
+@import "bourbon/bourbon";
+@import "bitters/bitters";
+@import "neat/neat";
+@import "font-awesome/scss/font-awesome.scss";
+@import "pygments.scss";
+
+//FONTS
+@import url(http://fonts.googleapis.com/css?family=Megrim);
+//@import url(http://fonts.googleapis.com/css?family=Sanchez:400italic,400);
+@import url(http://fonts.googleapis.com/css?family=Questrial);
+@import url(http://fonts.googleapis.com/css?family=Exo);
+
+//ARTICLES AND ABOUT US
+article.type-system-geometric {
+  $sans-serif: 'Questrial', sans-serif;
+  //$serif: 'Sanchez', serif;
+  $serif: 'Exo', serif;
+
+  @include span-columns(12); 
+  @include media($medium-screen) {
+    @include span-columns(8); 
+  }
+
+  @include clearfix;
+  text-align: left;
+
+  .type {
+    border-bottom: 1px solid;
+    display: inline-block;
+    font-family: $sans-serif;
+    font-size: .7em;
+    font-weight: 800;
+    margin-bottom: 2em;
+    padding: .3em 0;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .img-single{
+    @include span-columns(12 of 12);
+  }
+  .img-even{
+    @include span-columns(12 of 12);
+    @include media($medium-screen) {
+      @include span-columns(4 of 8); 
+    }
+  }
+  .img-odd{
+    @include span-columns(12 of 12);
+    @include media($medium-screen) {
+      @include span-columns(8/3 of 8); 
+    }
+  }
+
+  .highlight{
+    padding-left:5px;
+    padding-right: 5px;
+    box-shadow: 2px 2px 5px $dark-gray;
+    // @include media($large-screen){
+    //   max-width: $article-max-width;
+    // }
+  }
+
+  h1 {
+    font-family: $serif;
+    text-transform: uppercase;
+    font-size: 1.8em;
+    //font-weight: 700;
+    //text-shadow: 0px 2px 2px #1b6c98;
+    margin-bottom: .5em;
+
+    @include media($medium-screen) {
+      font-size: 2.6em;
+    }
+    // @include media($large-screen){
+    //   max-width: $article-max-width;
+    // }
+  }
+  .top-icon{
+    position:relative;
+    top:.2em;
+    max-height:1em;
+    padding-right:.5em;
+  }
+
+  h2 {
+    font-family: $serif;
+    font-style: italic;
+    font-size: 1.2em;
+    font-weight: 400;
+    line-height: 1.4em;
+    margin-bottom: 1.1em;
+
+    @include media($medium-screen) {
+      font-size: 1.3em;
+    }
+    // @include media($large-screen){
+    //   max-width: $article-max-width;
+    // }
+  }
+
+  h3 {
+    font-family: $serif;
+    font-size: 1.4em;
+    font-weight: 400;
+    line-height: 1.3em;
+    margin-bottom: .4em;
+  }
+
+  p.date {
+    color: transparentize($base-font-color, .6);
+    font-family: $serif;
+    font-style: italic;
+    font-size: .9em;
+    margin-bottom: .3em;
+  }
+
+  p {
+    font-family: $sans-serif;
+    line-height: 1.5em;
+    font-size: 1.05em;
+    margin-bottom: 1.5em;
+    // @include media($large-screen){
+    //   max-width: $article-max-width;
+    // }
+  }
+
+  a.read-more {
+    display: inline-block;
+    font-family: $sans-serif;
+    font-weight: 700;
+    font-size: .8em;
+    text-transform: uppercase;
+    margin-left: .2em;
+    position: relative;
+
+    span {
+      font-family: $sans-serif;
+      font-style: normal;
+      position: absolute;
+      font-size: 1.5em;
+      top: -1px;
+      right: -12px;
+    }
+  }
+  
+  hr {
+    width: 3em;
+  }
+
+  p.author {
+    font-family: $sans-serif;
+    &:before{
+      content:url("../images/favicon.png");
+      padding-right:1em;
+      vertical-align: -.2em;
+    }
+  }
+}
+//END ABOUT US / ARTICLE
+
+//MODAL
+//Original Modal section based on code by Kasper Mikiewicz
+.modal {
+  $modal-padding: 2em;
+  $modal-background: $base-body-color;
+  $modal-close-color: $light-gray;
+  $modal-image-height: 135px;
+  $modal-image-width: $modal-image-height;
+
+  label {
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+
+  label img {
+    $img-width: 300px;
+    border-radius: $img-width/2;
+    display: block;
+    max-width: $img-width;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .btn {
+    @include button(simple, $base-body-color);
+    font-size: $base-font-size;
+    margin-bottom: $base-line-height;
+  }
+
+  .modal-open {
+    overflow: hidden;
+  }
+
+  .modal-window { // overlay
+    @include transition(opacity .25s ease);
+    @include position(fixed, 0px 0px 0px 0px);
+    background: rgba(0,0,0, .85);
+    opacity: 0;
+    text-align: left;
+    visibility: hidden;
+    z-index: 99999999999;
+
+    .modal-bg {
+      @include position(absolute, 0px 0px 0px 0px);
+      cursor: pointer;
+    }
+  }
+
+  .modal-close {
+    @include position(absolute, null $modal-padding null null);
+    @include media($large-screen){
+      @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
+    }
+    @include size(1.5em);
+    cursor: pointer;
+    background: $modal-background;
+
+    &:after,
+    &:before {
+      @include position(absolute, 3px 3px 0 $modal-padding);
+      @include transform(rotate(45deg));
+      @include size(.15em 1.5em);
+      background: $modal-close-color;
+      content: '';
+      display: block;
+      //margin: 0 10px 0 0;
+      @include media($medium-screen){
+        margin: -3px 0 0 -1px;
+      }
+    }
+
+    &:hover:after,
+    &:hover:before {
+      background: darken($modal-close-color, 10);
+    }
+
+    &:before {
+      @include transform(rotate(-45deg));
+    }
+  }
+
+  .modal-inner {
+    @include transition(opacity .25s ease);
+    border-radius: $base-border-radius;
+    background: $modal-background;
+    margin: auto;
+    max-height: 95%;
+    position: relative;
+    overflow: auto;
+    width: 95%;
+    padding: $modal-padding /2;
+    margin-top: .6em;
+
+    @include media($medium-screen) {
+      padding: $modal-padding;
+      width: 60%;
+      max-height: 60%;
+      margin-top: 10em;
+    }
+
+    @include media($large-screen) {
+      width: 50%;
+      margin-top: 10em;
+    }
+
+    h1 {
+      color: $base-font-color;
+      //margin-bottom: .6em;
+      text-align: left;
+      text-transform: capitalize;
+    }
+
+    p {
+      font-size: $base-font-size;
+      max-width: 100% !important;
+      padding: 0;
+      text-align: left;
+
+      &.intro {
+        color: $blue;
+        line-height: 1.6em;
+      }
+
+      &.body { 
+        color: $base-font-color;
+        line-height: 1.45em;
+
+        @include media($medium-screen) {
+          @include columns(2 8em);
+        }
+      }
+    }
+
+    a.cta {
+      color: white;
+      display: inline-block;
+      margin-right: .5em;
+      margin-top: 1em;
+
+      &:last-child {
+        padding: 0 2em;
+      }
+    }
+  }
+
+  ul{
+    padding-left:1em;
+  }
+  ul:before{
+    content:url('../images/favicon.png');
+    padding-right:1em;
+    vertical-align: -.2em;
+  }
+
+  .modal-state:checked + .modal-window {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-state:checked + .modal-window .modal-inner {
+    top: 0;
+  }
+}
+//END MODAL
+
+//HEAD AND PAGES WRAPPER
+.first{
+  @include outer-container;
+}
+//END HEAD AND PAGES WRAPPER 
+
+//SECTION FOR ITEMS
+.second{
+  // @include outer-container;
+  // @include span-columns(12);
+}
+//END SECTION FOR ITEMS
+
+//HEADER
+header{
+  text-align:center;
+
+  @include span-columns(12); 
+  @include media($medium-screen) {
+    @include span-columns(4); 
+  }
+  // @include media($medium-screen $large-screen){
+  //   text-align:left;
+  // }
+  h1{
+    font-family: 'Megrim', cursive;
+    font-size:40px;
+    @include media($medium-screen){
+      font-size:60px;
+    }
+    @include media($large-screen){
+      font-size:90px;
+    }
+  }
+  h3{
+    font-family:$sans-serif;
+    padding-bottom:1em;
+    @include media($medium-screen){
+      padding-bottom:0px;
+    }
+  }
+  img{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    padding:0px 0px 20px 0px;//just to separate from h2
+  }
+}
+//END HEADER
+
+//ITEMS
+@mixin grid-item-columns($columns) {
+  width: (100% / 12) * $columns;
+}
+
+.grid-items-lines {
+  $grid-items-background: $base-body-color;
+  $grid-item-background: $base-body-color;
+  $grid-item-border: 1px solid transparentize($base-font-color, .8); 
+  $grid-item-columns: 4;
+  $grid-item-big-columns: 8;
+  $grid-item-color: $base-font-color;
+  $grid-item-height: 14em;
+
+  //@include clearfix;
+  position: relative;
+    
+  .grid-item {
+    @include transition (all 0.2s ease-in-out);
+    height:auto;
+    @include media($medium-screen){
+      height: $grid-item-height;
+    }
+    background: $grid-item-background;
+    width: 100%;
+    overflow: hidden;
+    //overflow:wrap;
+    float: left;
+    padding: 1em;
+    @include media($medium-screen){
+      padding: 2em;
+    }
+    border-right: $grid-item-border;
+    border-bottom: $grid-item-border;
+    cursor: pointer;
+
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-columns);
+    }
+
+    &:hover {
+      background: transparentize($grid-item-color, .95);
+    }
+  }
+
+  .grid-item img {
+      display: block;
+      width: 100%;
+      @include media($medium-screen){
+        width:auto;
+        height:100%;
+        margin-right: 1em;
+      }      
+      float:left;
+
+      &.thumb{
+        display:none;
+        @include media($medium-screen){
+          display:block;
+        }
+      }
+      &.full{
+        display:block;
+        @include media($medium-screen){
+          display:none;
+        }
+      }
+    }
+
+  .grid-item h1 {
+      color: $grid-item-color;
+      font-size: 1.3em;
+      text-align: center;
+      @include media($medium-screen) {
+        text-align: left;
+        font-size: 1.3em;
+      }
+      margin-bottom: .4em;
+    }
+
+  .grid-item p {
+      color: transparentize($grid-item-color, .4);
+      display:none;
+      @include media($medium-screen) {
+        //max-width: 70%;
+        display:inline;
+      }
+    }
+
+  .grid-item-big {
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-big-columns);
+    }
+    p {
+      @include media($medium-screen) {
+        //max-width: 60%;
+      }  
+    }
+  }
+
+  // this, below, might not be the most beautiful solution but it removes the outer borders by using the background color.
+  .bottom-cover {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 3px;
+    background: $grid-items-background;
+  }
+
+  .right-cover {
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    width: 4px;
+    background: $grid-items-background;
+  }
+}
+//END ITEMS
+
+//FOOTER
+footer{
+  $footer-background: $dark-gray;
+  $footer-color: $medium-gray;
+  $footer-link-color: transparentize($footer-color,.6);
+
+  @include span-columns(12); 
+
+  font-family:$sans-serif;
+  background: $footer-background;
+  //min-height: 45px;
+  height:45px;
+  padding:10px;
+  //width: 100%;
+  color: $footer-color;
+  img{
+    float:left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    height: 1.6em;
+  }
+  ul.links li {
+    float:left;
+    @include media($medium-screen){
+      display:inline;
+      &:after{
+        content:" | ";
+        padding:0px 3px 0px 3px;
+      }
+    }
+  }
+  ul.social li {
+    padding: 0px 10px 0px 0px;
+    float:right;
+  }
+  p{
+    margin:0px;
+    @include media($large-screen){
+      float:left;
+    }
+  }
+  a{
+    color:$footer-link-color;
+    &:hover {
+      color: transparentize($footer-color, 0);
+    }
+  }
+  .small-hidden{
+    display: none;
+    @include media($medium-screen){  
+        display: inline;
+    }
+  }
+}
+//END FOOTER

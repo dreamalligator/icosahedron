@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block title %}all posts // {{ super() }}{% endblock title %}
+{% block pagetitle %}all posts{% endblock pagetitle %}
+{% block content %}
+<h1>All posts</h1>
+{% for article in dates %}
+    <a href="{{ SITEURL }}/{{ article.author.url }}" title="See posts by {{ article.author }}">
+        {% if article.author_gravatar %}
+            <img class="avatar" alt="{{ article.author }}" src="{{ article.author_gravatar }}">
+        {% endif %}
+    </a>
+    {% for tag in article.tags %}
+        <a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+    {% endfor %}
+    <b>{{ article.date|strftime('%Y%m%d') }}</b>
+    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+    <p>{{ article.author }} in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></p>
+{% endfor %}
+{% endblock %}

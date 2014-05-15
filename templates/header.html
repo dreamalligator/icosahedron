@@ -1,0 +1,23 @@
+<header>
+  <h1>{{ HEADERTITLE }}</h1>
+  <a href="{{ SITEURL }}" title="{{ SITENAME }}"><img src="{{ SITEURL }}/{% if SYMBOL %}images/{{ SYMBOL }}{% else %}theme/images/icosahedron.png{% endif %}"></a>
+  <div class="modal">
+    <label for="modal-1">
+      <div class="js-btn"><h3>ABOUT US</h3></div>
+    </label>
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal-window">
+      <div class="modal-inner">
+        <label class="modal-close" for="modal-1"></label>
+        <h1>About Us</h1>
+        <p class="intro">{{ ABOUTUS_INTRO }}</p>
+        <p class="body">{{ ABOUTUS_BODY }}</p><ul><a href="#">tom [at] antivapor.net</a></ul><ul><a href="#">starbit [at] antivapor.net</a></ul>
+      </div>
+    </div>
+    <!-- <ul class="social">
+      {% for title, link in SOCIAL %}
+        <li><a class="fa fa-{{ title }}" href="{{ link }}"></a></li>
+      {% endfor %}
+    </ul> -->
+  </div>
+</header>

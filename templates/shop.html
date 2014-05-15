@@ -1,0 +1,17 @@
+{% if page.shoptype == 'etsy' %}
+<div class="grid-items-lines">
+  {% for item in page.item_id %}
+  	{% set i = loop.index0 %}
+    <a href="{{ page.item_url[i] }}" class="grid-item{% if i % 5 == 0 %} grid-item-big{% endif %}">
+      <img class="thumb" src="{{ page.item_img1[i] }}" alt="{{ page.item_title[i] }}">
+      <img class="full" src="{{ page.item_img2[i] }}" alt="{{ page.item_title[i] }}">
+      <h1>{{ page.item_title[i] }}</h1>
+      <p>{{ page.item_desc[i]}}</p>
+    </a>
+  {% endfor %}
+  <div class="right-cover"></div>
+  <div class="bottom-cover"></div>
+</div>
+{% elif page.shoptype == 'envy' %}
+<p>Store Envy not supported yet!</p>
+{% endif %}

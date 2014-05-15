@@ -1,0 +1,19 @@
+<footer>
+  <a href="{{ SITEURL }}"><img src="{{ SITEURL }}/theme/images/icosahedron_w.png" alt="icosahedron"></a>
+  <ul class="links">
+    {% for title, link in MENUITEMS %}
+      <li><a href="{{ link }}">{{ title }}</a></li>
+    {% endfor %}
+  </ul>
+  <ul class="social">
+      {% for title, link in SOCIAL %}
+        <li><a class="fa fa-{{ title }}" href="{{ link }}"></a></li>
+      {% endfor %}
+  </ul>
+<!--   <ul class="donate">
+    {% for title, link in DONATE %}
+      <li><a class="fa" href="{{ link }}"></a></li>
+    {% endfor %}
+  </ul> -->
+  <p class="small-hidden"><a href="https://github.com/digitalvapor/icosahedron">Icosahedron</a> theme by [<a href="https://github.com/digitalvapor">digitalvapor</a>]</p>
+</footer>
