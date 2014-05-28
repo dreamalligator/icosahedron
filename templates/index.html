@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include 'header.html' %}
-<section class="first">
+<section>
+	{% include 'header.html' %}
 	{% for page in PAGES %}
 		{% include 'post.html' %}
 	{% endfor %}
-</section>
-<hr>
-<section class="second">
 	{% for article in articles %}
 		{% if loop.first %}
+			<hr>
 			<article class="type-system-geometric">
 			{% include 'article_content.html' %}
 			<hr>

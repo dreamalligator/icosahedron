@@ -2,6 +2,7 @@
 {% block title %}{{ page.title|striptags }} // {{ super() }}{% endblock title %}
 
 {% block content %}
+{% include 'header.html' %}
 <article class="type-system-geometric">
   <a href="{{ SITEURL }}"><img class="top-icon" src="{{ SITEURL }}/theme/images/icosahedron.png" alt="icosahedron"></a>
   {% set this_title = page.title %}

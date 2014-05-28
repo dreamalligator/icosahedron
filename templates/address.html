@@ -1,0 +1,5 @@
+<div itemscope itemtype="http://schema.org/PostalAddress" class="hidden">
+{% for title, value in ADDRESS %}
+<span itemprop="{{ title }}">{{ value }}</span>{% if not loop.last %}<br>{% endif %}
+{% endfor %}
+</div>

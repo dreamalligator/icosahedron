@@ -2,7 +2,7 @@
 <div class="grid-items-lines">
   {% for item in article.item_id %}
     {% set i = loop.index0 %}
-    <a href="{{ article.item_url[i] }}" class="grid-item{% if article.item_id|length == 2 and loop.first %} grid-item-big{% endif %}">
+    <a href="{{ article.item_url[i] }}" class="grid-item grid-item-three">
       <img class="thumb" src="{{ article.item_img1[i] }}" alt="{{ article.item_title[i] }}">
       <img class="full" src="{{ article.item_img2[i] }}" alt="{{ article.item_title[i] }}">
       <h1>{{ article.item_title[i] }}</h1>

@@ -4,11 +4,33 @@
 @import "font-awesome/scss/font-awesome.scss";
 @import "pygments.scss";
 
+//override some settings
+$max-width: 2000px;
+$default-layout-direction:RTL;
+
 //FONTS
-@import url(http://fonts.googleapis.com/css?family=Megrim);
+//@import url(http://fonts.googleapis.com/css?family=Megrim);
+@font-face {
+  font-family: 'Megrim';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Megrim'), url(https://themes.googleusercontent.com/static/fonts/megrim/v5/wEAANqPdhC-qap-OX73FcA.woff) format('woff');
+}
 //@import url(http://fonts.googleapis.com/css?family=Sanchez:400italic,400);
-@import url(http://fonts.googleapis.com/css?family=Questrial);
-@import url(http://fonts.googleapis.com/css?family=Exo);
+//@import url(http://fonts.googleapis.com/css?family=Questrial);
+@font-face {
+  font-family: 'Questrial';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Questrial'), local('Questrial-Regular'), url(https://themes.googleusercontent.com/static/fonts/questrial/v4/MYWJ4lYm5dbZ1UBuYox79D8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+//@import url(http://fonts.googleapis.com/css?family=Exo);
+@font-face {
+  font-family: 'Exo';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Exo Regular'), local('Exo-Regular'), url(https://themes.googleusercontent.com/static/fonts/exo/v2/wocyXRLWPo2Av-yUTmmbTA.woff) format('woff');
+}
 
 //ARTICLES AND ABOUT US
 article.type-system-geometric {
@@ -16,16 +38,26 @@ article.type-system-geometric {
   //$serif: 'Sanchez', serif;
   $serif: 'Exo', serif;
 
-  @include span-columns(12); 
-  @include media($medium-screen) {
-    @include span-columns(8); 
+  @include clearfix;
+  @include span-columns(12);
+  @include media($medium-screen){
+    @include span-columns(8 of 12);
   }
-
   @include clearfix;
   text-align: left;
 
+  audio{
+    @include span-columns(12);
+    margin-top:1.5em;
+    margin-bottom:1.5em;
+    @include media($medium-screen){
+      @include span-columns(8);
+    }
+  }
+
   .type {
     border-bottom: 1px solid;
+    //border-right: 10px white solid;//TODO: using pelican minify plugin removes space between top page links, this is a temp fix
     display: inline-block;
     font-family: $sans-serif;
     font-size: .7em;
@@ -41,14 +73,14 @@ article.type-system-geometric {
   }
   .img-even{
     @include span-columns(12 of 12);
-    @include media($medium-screen) {
-      @include span-columns(4 of 8); 
+    @include media($medium-screen){
+      @include span-columns(4 of 8,$medium-screen);
     }
   }
   .img-odd{
     @include span-columns(12 of 12);
-    @include media($medium-screen) {
-      @include span-columns(8/3 of 8); 
+    @include media($medium-screen){
+      @include span-columns(8/3 of 8,$medium-screen);
     }
   }
 
@@ -56,9 +88,6 @@ article.type-system-geometric {
     padding-left:5px;
     padding-right: 5px;
     box-shadow: 2px 2px 5px $dark-gray;
-    // @include media($large-screen){
-    //   max-width: $article-max-width;
-    // }
   }
 
   h1 {
@@ -72,9 +101,6 @@ article.type-system-geometric {
     @include media($medium-screen) {
       font-size: 2.6em;
     }
-    // @include media($large-screen){
-    //   max-width: $article-max-width;
-    // }
   }
   .top-icon{
     position:relative;
@@ -94,9 +120,6 @@ article.type-system-geometric {
     @include media($medium-screen) {
       font-size: 1.3em;
     }
-    // @include media($large-screen){
-    //   max-width: $article-max-width;
-    // }
   }
 
   h3 {
@@ -120,9 +143,6 @@ article.type-system-geometric {
     line-height: 1.5em;
     font-size: 1.05em;
     margin-bottom: 1.5em;
-    // @include media($large-screen){
-    //   max-width: $article-max-width;
-    // }
   }
 
   a.read-more {
@@ -143,7 +163,7 @@ article.type-system-geometric {
       right: -12px;
     }
   }
-  
+
   hr {
     width: 3em;
   }
@@ -280,11 +300,11 @@ article.type-system-geometric {
       text-align: left;
 
       &.intro {
-        color: $blue;
+        color: $base-accent-color;
         line-height: 1.6em;
       }
 
-      &.body { 
+      &.body {
         color: $base-font-color;
         line-height: 1.45em;
 
@@ -306,10 +326,10 @@ article.type-system-geometric {
     }
   }
 
-  ul{
+  li{
     padding-left:1em;
   }
-  ul:before{
+  li:before{
     content:url('../images/favicon.png');
     padding-right:1em;
     vertical-align: -.2em;
@@ -327,25 +347,24 @@ article.type-system-geometric {
 //END MODAL
 
 //HEAD AND PAGES WRAPPER
-.first{
+section{
   @include outer-container;
+  @include span-columns(12);
+  @include clearfix;
 }
-//END HEAD AND PAGES WRAPPER 
-
-//SECTION FOR ITEMS
-.second{
-  // @include outer-container;
-  // @include span-columns(12);
-}
-//END SECTION FOR ITEMS
+//END HEAD AND PAGES WRAPPER
 
 //HEADER
 header{
   text-align:center;
-
-  @include span-columns(12); 
-  @include media($medium-screen) {
-    @include span-columns(4); 
+  @include clearfix;
+  @include span-columns(12);
+  @include media($medium-screen){
+    @include span-columns(4 of 12);
+    height:800px;//TODO: remove this temp fix
+    // position:fixed;
+    // top:0px;
+    // right:0px;
   }
   // @include media($medium-screen $large-screen){
   //   text-align:left;
@@ -353,12 +372,14 @@ header{
   h1{
     font-family: 'Megrim', cursive;
     font-size:40px;
+
     @include media($medium-screen){
       font-size:60px;
     }
     @include media($large-screen){
       font-size:90px;
     }
+
   }
   h3{
     font-family:$sans-serif;
@@ -368,7 +389,7 @@ header{
     }
   }
   img{
-    display:block;
+    //display:block;
     margin-left:auto;
     margin-right:auto;
     padding:0px 0px 20px 0px;//just to separate from h2
@@ -384,15 +405,15 @@ header{
 .grid-items-lines {
   $grid-items-background: $base-body-color;
   $grid-item-background: $base-body-color;
-  $grid-item-border: 1px solid transparentize($base-font-color, .8); 
-  $grid-item-columns: 4;
-  $grid-item-big-columns: 8;
+  $grid-item-border: 1px solid transparentize($base-font-color, .8);
+  $grid-item-columns: $grid-columns*1/3;
+  $grid-item-two-columns: $grid-columns*2/3;
+  $grid-item-three-columns: $grid-columns;
   $grid-item-color: $base-font-color;
   $grid-item-height: 14em;
 
-  //@include clearfix;
   position: relative;
-    
+
   .grid-item {
     @include transition (all 0.2s ease-in-out);
     height:auto;
@@ -422,57 +443,56 @@ header{
   }
 
   .grid-item img {
-      display: block;
-      width: 100%;
-      @include media($medium-screen){
-        width:auto;
-        height:100%;
-        margin-right: 1em;
-      }      
-      float:left;
+    display: block;
+    width: 100%;
+    @include media($medium-screen){
+      width:auto;
+      height:100%;
+      margin-right: 1em;
+    }
+    float:left;
 
-      &.thumb{
-        display:none;
-        @include media($medium-screen){
-          display:block;
-        }
-      }
-      &.full{
+    &.thumb{
+      display:none;
+      @include media($medium-screen){
         display:block;
-        @include media($medium-screen){
-          display:none;
-        }
       }
     }
+    &.full{
+      display:block;
+      @include media($medium-screen){
+        display:none;
+      }
+    }
+  }
 
   .grid-item h1 {
-      color: $grid-item-color;
+    color: $grid-item-color;
+    font-size: 1.3em;
+    text-align: center;
+    @include media($medium-screen) {
+      text-align: left;
       font-size: 1.3em;
-      text-align: center;
-      @include media($medium-screen) {
-        text-align: left;
-        font-size: 1.3em;
-      }
-      margin-bottom: .4em;
     }
+    margin-bottom: .4em;
+  }
 
   .grid-item p {
-      color: transparentize($grid-item-color, .4);
-      display:none;
-      @include media($medium-screen) {
-        //max-width: 70%;
-        display:inline;
-      }
+    color: transparentize($grid-item-color, .4);
+    display:none;
+    @include media($medium-screen) {
+      display:inline;
     }
+  }
 
-  .grid-item-big {
+  .grid-item-two {
     @include media($large-screen) {
-      @include grid-item-columns($grid-item-big-columns);
+      @include grid-item-columns($grid-item-two-columns);
     }
-    p {
-      @include media($medium-screen) {
-        //max-width: 60%;
-      }  
+  }
+  .grid-item-three {
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-three-columns);
     }
   }
 
@@ -500,15 +520,14 @@ footer{
   $footer-background: $dark-gray;
   $footer-color: $medium-gray;
   $footer-link-color: transparentize($footer-color,.6);
+  $footer-font-size: $base-font-size;
 
-  @include span-columns(12); 
-
+  @include span-columns(12);
   font-family:$sans-serif;
-  background: $footer-background;
-  //min-height: 45px;
-  height:45px;
+  font-size: $footer-font-size;
   padding:10px;
-  //width: 100%;
+  background: $footer-background;
+  height:45px;
   color: $footer-color;
   img{
     float:left;
@@ -544,9 +563,20 @@ footer{
   }
   .small-hidden{
     display: none;
-    @include media($medium-screen){  
+    @include media($medium-screen){
         display: inline;
     }
   }
 }
 //END FOOTER
+
+.hidden{
+  display:none;
+}
+
+.hidden-small{
+    display:none;
+    @include media($medium-screen){
+      display:block;
+    }
+}

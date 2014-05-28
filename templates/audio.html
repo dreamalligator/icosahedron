@@ -1,0 +1,11 @@
+{% if article.audio %}
+	{% set filename = article.audio %}
+{% elif page.audio %}
+	{% set filename = page.audio %}
+{% endif %}
+{% if filename is defined %}
+	<audio controls>
+	<source src="{{ SITEURL }}/audio/{{ filename }}.ogg" type="audio/ogg">
+	<source src="{{ SITEURL }}/audio/{{ filename }}.mp3" type="audio/mpeg">
+	</audio>
+{% endif %}

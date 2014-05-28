@@ -4,15 +4,20 @@
 		<h2>{{ article.subtitle|title }}</h2>
 	{% endif %}
 	<p class="date">{{ article.locale_date }}</p>
-	<p class="author">{% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %}</p>
-	<!-- <p class=""><a href="{{ SITEURL }}/{{ article.author.url }}" title="See posts by {{ article.author }}"><img class="article-avatar" alt="{{ article.author }}" src="{{ article.author_gravatar }}"></a></p> -->
 	{% for tag in article.tags %}
 		<a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
 	{% endfor %}
-	<p>{{ article.content }}</p>
+	{{ article.content }}
+	<p class="author">{% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %}</p>
+	{% if article.audio %}
+	{% include 'audio.html' %}
+	{% endif %}
 	{% if article.image %}
 		{% for image in article.image.split(',') %}
 			<img class="{% if article.image.split(',')|length == 1 %}img-single{% elif article.image.split(',')|length is even() %}img-even{% else %}img-odd{% endif %}" src="{{ SITEURL }}/images/{{ image }}" alt="{{ image }}">
 		{% endfor %}
+	{% endif %}
+	{% if ETSY_API_KEY or ENVY_API_KEY %}
+	    {% include 'item.html' %}
 	{% endif %}
 {% endblock %}
