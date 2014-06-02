@@ -4,9 +4,6 @@
 		<h2>{{ article.subtitle|title }}</h2>
 	{% endif %}
 	<p class="date">{{ article.locale_date }}</p>
-	{% for tag in article.tags %}
-		<a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
-	{% endfor %}
 	{{ article.content }}
 	<p class="author">{% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %}</p>
 	{% if article.audio %}
@@ -20,4 +17,7 @@
 	{% if ETSY_API_KEY or ENVY_API_KEY %}
 	    {% include 'item.html' %}
 	{% endif %}
+	{% for tag in article.tags %}
+		<a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% if not loop.last %}|{% endif %}
+	{% endfor %}
 {% endblock %}

@@ -6,12 +6,15 @@
       <img class="thumb" src="{{ page.item_img1[i] }}" alt="{{ page.item_title[i] }}">
       <img class="full" src="{{ page.item_img2[i] }}" alt="{{ page.item_title[i] }}">
       <h1>{{ page.item_title[i] }}</h1>
-      <p>{{ page.item_desc[i]}}</p>
+      <p>{{ page.item_desc[i] }}</p>
     </a>
   {% endfor %}
   <div class="right-cover"></div>
   <div class="bottom-cover"></div>
 </div>
+{% if USE_BUTTON %}
+<nav class="actions"><a href="{{ page.store_url }}" title="{{ page.etsy_shopname }}">Visit our Shop!</a></nav>
+{% endif %}
 {% elif page.shoptype == 'envy' %}
 <p>Store Envy not supported yet!</p>
 {% endif %}

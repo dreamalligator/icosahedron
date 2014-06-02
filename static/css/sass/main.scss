@@ -34,9 +34,9 @@ $default-layout-direction:RTL;
 
 //ARTICLES AND ABOUT US
 article.type-system-geometric {
-  $sans-serif: 'Questrial', sans-serif;
+  $sans-serif: 'Questrial', sans-serif !global;
   //$serif: 'Sanchez', serif;
-  $serif: 'Exo', serif;
+  $serif: 'Exo', serif !global;
 
   @include clearfix;
   @include span-columns(12);
@@ -57,7 +57,6 @@ article.type-system-geometric {
 
   .type {
     border-bottom: 1px solid;
-    //border-right: 10px white solid;//TODO: using pelican minify plugin removes space between top page links, this is a temp fix
     display: inline-block;
     font-family: $sans-serif;
     font-size: .7em;
@@ -87,17 +86,20 @@ article.type-system-geometric {
   .highlight{
     padding-left:5px;
     padding-right: 5px;
-    box-shadow: 2px 2px 5px $dark-gray;
+    &:before{
+        content: attr(rel);
+    }
   }
-
+  h1,h2,h3,h4{
+      content: attr(rel);
+  }
   h1 {
     font-family: $serif;
     text-transform: uppercase;
     font-size: 1.8em;
     //font-weight: 700;
     //text-shadow: 0px 2px 2px #1b6c98;
-    margin-bottom: .5em;
-
+    margin-bottom: 0px;
     @include media($medium-screen) {
       font-size: 2.6em;
     }
@@ -136,6 +138,7 @@ article.type-system-geometric {
     font-style: italic;
     font-size: .9em;
     margin-bottom: .3em;
+    text-align: right;
   }
 
   p {
@@ -164,9 +167,9 @@ article.type-system-geometric {
     }
   }
 
-  hr {
-    width: 3em;
-  }
+  // hr {
+  //   width: 3em;
+  // }
 
   p.author {
     font-family: $sans-serif;
@@ -174,6 +177,52 @@ article.type-system-geometric {
       content:url("../images/favicon.png");
       padding-right:1em;
       vertical-align: -.2em;
+    }
+  }
+
+  .footnote{
+    hr{margin: 0px 0px 1em 0px;}
+    ul{
+      list-style: disc;
+      list-style-position: outside;
+      padding-left:1.5em;
+    }
+    &:before{
+      font-family: $sans-serif;
+      font-size: 1.05em;
+      content: 'Footnotes:';
+      font-weight: bold;
+    }
+    .footnote-backref{
+      color:transparent;
+      &:before{
+        display:block;
+        @extend .fa;
+        // @extend .fa-long-arrow-up;
+        @extend .fa-level-down;
+        @include transform(rotate(180deg));
+        float:left;
+        color:$cyan;
+      }
+    }
+  }
+
+  table{
+    table-layout: auto;
+    thead{
+      tr{
+        th{
+          padding:0.02em;
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          padding:0.02em;
+          padding-right:.5em;
+        }
+      }
     }
   }
 }
@@ -246,7 +295,6 @@ article.type-system-geometric {
       background: $modal-close-color;
       content: '';
       display: block;
-      //margin: 0 10px 0 0;
       @include media($medium-screen){
         margin: -3px 0 0 -1px;
       }
@@ -288,7 +336,6 @@ article.type-system-geometric {
 
     h1 {
       color: $base-font-color;
-      //margin-bottom: .6em;
       text-align: left;
       text-transform: capitalize;
     }
@@ -346,11 +393,21 @@ article.type-system-geometric {
 }
 //END MODAL
 
+// body{
+//   display:flex;
+//   min-height: 100vh;
+//   flex-direction: column;
+// }
+
 //HEAD AND PAGES WRAPPER
 section{
   @include outer-container;
   @include span-columns(12);
   @include clearfix;
+  // @include media($xxlarge-screen){
+  //   @include display(flex);
+  // }
+  //flex:1;
 }
 //END HEAD AND PAGES WRAPPER
 
@@ -361,14 +418,7 @@ header{
   @include span-columns(12);
   @include media($medium-screen){
     @include span-columns(4 of 12);
-    height:800px;//TODO: remove this temp fix
-    // position:fixed;
-    // top:0px;
-    // right:0px;
   }
-  // @include media($medium-screen $large-screen){
-  //   text-align:left;
-  // }
   h1{
     font-family: 'Megrim', cursive;
     font-size:40px;
@@ -389,10 +439,9 @@ header{
     }
   }
   img{
-    //display:block;
     margin-left:auto;
     margin-right:auto;
-    padding:0px 0px 20px 0px;//just to separate from h2
+    padding:0px 0px 20px 0px;
   }
 }
 //END HEADER
@@ -406,9 +455,9 @@ header{
   $grid-items-background: $base-body-color;
   $grid-item-background: $base-body-color;
   $grid-item-border: 1px solid transparentize($base-font-color, .8);
-  $grid-item-columns: $grid-columns*1/3;
-  $grid-item-two-columns: $grid-columns*2/3;
-  $grid-item-three-columns: $grid-columns;
+  $grid-item-columns: $grid-columns*1/3 !global;
+  $grid-item-two-columns: $grid-columns*2/3 !global;
+  $grid-item-three-columns: $grid-columns !global;
   $grid-item-color: $base-font-color;
   $grid-item-height: 14em;
 
@@ -426,32 +475,28 @@ header{
     //overflow:wrap;
     float: left;
     padding: 1em;
-    @include media($medium-screen){
-      padding: 2em;
-    }
     border-right: $grid-item-border;
     border-bottom: $grid-item-border;
     cursor: pointer;
-
+    @include media($medium-screen){
+      padding: 2em;
+    }
     @include media($large-screen) {
       @include grid-item-columns($grid-item-columns);
     }
-
     &:hover {
       background: transparentize($grid-item-color, .95);
     }
   }
-
   .grid-item img {
     display: block;
     width: 100%;
+    float:left;
     @include media($medium-screen){
       width:auto;
       height:100%;
       margin-right: 1em;
     }
-    float:left;
-
     &.thumb{
       display:none;
       @include media($medium-screen){
@@ -465,7 +510,6 @@ header{
       }
     }
   }
-
   .grid-item h1 {
     color: $grid-item-color;
     font-size: 1.3em;
@@ -476,7 +520,6 @@ header{
     }
     margin-bottom: .4em;
   }
-
   .grid-item p {
     color: transparentize($grid-item-color, .4);
     display:none;
@@ -484,7 +527,6 @@ header{
       display:inline;
     }
   }
-
   .grid-item-two {
     @include media($large-screen) {
       @include grid-item-columns($grid-item-two-columns);
@@ -504,7 +546,6 @@ header{
     height: 3px;
     background: $grid-items-background;
   }
-
   .right-cover {
     position: absolute;
     right: 0px;
@@ -514,6 +555,42 @@ header{
   }
 }
 //END ITEMS
+
+//ADAPTED FROM https://github.com/thoughtbot/bitters/blob/gh-pages/_sass/layout/_nav.scss
+.actions {
+  a {
+    //&:before{content: 'Visit Our Shop!';}
+    @include span-columns($grid-columns);
+    @include transition();
+    background: $base-link-color;
+    //background:url("../images/orange_mushroom_banner.png");
+    border-radius: $base-border-radius * 2;
+    color: $base2;
+    display: inline-block;
+    font-family: $sans-serif;
+    font-size: em(14);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 2em 0 2em 0;
+    padding: 1em;
+    text-align: center;
+    text-transform: uppercase;
+    //text-shadow: 0px 2px 2px $dark-gray;
+
+    @include media($medium-screen){
+      //@include span-columns($grid-item-columns);
+      width: 40%;
+      font-size: em(20);
+      margin: 1em 30% 1em 30%;
+    }
+
+    &:hover {
+      @include transition();
+      background: lighten($base-link-color, 5);
+      //http://robots.thoughtbot.com/controlling-color-with-sass-color-functions
+    }
+  }
+}
 
 //FOOTER
 footer{
