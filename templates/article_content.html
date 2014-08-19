@@ -5,7 +5,8 @@
 	{% endif %}
 	<p class="date">{{ article.locale_date }}</p>
 	{{ article.content }}
-	<p class="author">{% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %}</p>
+	{% if article.author_gplus %}{% set GPLUS_ID = article.author_gplus %}{% else %}{% set GPLUS_ID = AUTHOR_GPLUS %}{% endif %}
+	<p class="author"><a href="https://plus.google.com/{{ GPLUS_ID }}?rel=author">{% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %}</a></p>
 	{% if article.audio %}
 	{% include 'audio.html' %}
 	{% endif %}
@@ -17,6 +18,7 @@
 	{% if ETSY_API_KEY or ENVY_API_KEY %}
 	    {% include 'item.html' %}
 	{% endif %}
+	<p>[<a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>]
 	{% for tag in article.tags %}
 		<a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% if not loop.last %}|{% endif %}
 	{% endfor %}
