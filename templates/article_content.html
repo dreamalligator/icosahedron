@@ -5,6 +5,7 @@
 	{% endif %}
 	<p class="date">{{ article.locale_date }}</p>
 	{{ article.content }}
+	{% if article.notebook %}{% include 'notebook_footer.html' %}{% endif %}
 	{% if article.author_gplus %}{% set GPLUS_ID = article.author_gplus %}{% else %}{% set GPLUS_ID = AUTHOR_GPLUS %}{% endif %}
 	<p class="author"><a href="https://plus.google.com/{{ GPLUS_ID }}?rel=author">{% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %}</a></p>
 	{% if article.audio %}
