@@ -90,6 +90,9 @@ article.type-system-geometric {
         content: attr(rel);
     }
   }
+  .highlight-ipynb{
+    @extend .highlight;
+  }
   h1,h2,h3,h4{
       content: attr(rel);
   }
