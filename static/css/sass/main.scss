@@ -93,6 +93,12 @@ article.type-system-geometric {
   .highlight-ipynb{
     @extend .highlight;
   }
+  .prompt{
+    display:none;
+    @include media($large-screen){
+        display:inline;
+    }
+  }
   h1,h2,h3,h4{
       content: attr(rel);
   }
