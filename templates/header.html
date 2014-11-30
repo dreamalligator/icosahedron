@@ -6,21 +6,4 @@
   {% endif %}
   <h1 class="{% if hide %}hidden{% endif %}">{{ HEADERTITLE }}</h1>
   <a href="{{ SITEURL }}" title="{{ SITENAME }}"><img class="{% if hide %}hidden-small{% endif %}" src="{{ SITEURL }}/{% if SYMBOL %}images/{{ SYMBOL }}{% else %}theme/images/icosahedron.png{% endif %}" alt="{{ SITENAME|title }} Icon"></a>
-  <div class="modal{% if hide %} hidden{% endif %}">
-    <label for="modal-1">
-      <div class="js-btn"><h3>ABOUT US</h3></div>
-    </label>
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    <div class="modal-window">
-      <div class="modal-inner">
-        <label class="modal-close" for="modal-1"></label>
-        <h1>About Us</h1>
-        <p class="intro">{{ ABOUTUS_INTRO }}</p>
-        <p class="body">{{ ABOUTUS_BODY }}</p><ul><li><a href="#">tom [at] antivapor.net</a></li><li><a href="#">starbit [at] antivapor.net</a></li></ul>
-      </div>
-    </div>
-  </div>
-  {% if ADDRESS %}
-  {% include 'address.html' %}
-  {% endif %}
 </header>
