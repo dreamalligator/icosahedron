@@ -23,6 +23,7 @@
 					{% if not loop.last %}|{% endif %}
 				{% endfor %}
 				</p>
+				<!--<p>{{ article.summary }}</p>-->
 				<p>Filed under <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a> on <b> {{article.date|strftime('%Y%m%d') }}</b></p>
 				<hr>
 			</article>

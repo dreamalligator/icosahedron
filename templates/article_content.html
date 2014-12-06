@@ -11,11 +11,13 @@
 	{% if article.audio %}
 	{% include 'audio.html' %}
 	{% endif %}
+	{# disabled representative images appended to blog posts
 	{% if article.image %}
 		{% for image in article.image.split(',') %}
 			<img class="{% if article.image.split(',')|length == 1 %}img-single{% elif article.image.split(',')|length is even() %}img-even{% else %}img-odd{% endif %}" src="{{ SITEURL }}/images/{{ image }}" alt="{{ image }}">
 		{% endfor %}
 	{% endif %}
+	#}
 	{% if ETSY_API_KEY or ENVY_API_KEY %}
 	    {% include 'item.html' %}
 	{% endif %}

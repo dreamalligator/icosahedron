@@ -33,7 +33,7 @@ $default-layout-direction:RTL;
 }
 
 //ARTICLES AND ABOUT US
-article.type-system-geometric {
+.type-system-geometric {
   $sans-serif: 'Questrial', sans-serif !global;
   //$serif: 'Sanchez', serif;
   $serif: 'Exo', serif !global;
@@ -119,7 +119,6 @@ article.type-system-geometric {
     max-height:1em;
     padding-right:.5em;
   }
-
   h2 {
     font-family: $serif;
     font-style: italic;
@@ -435,6 +434,72 @@ header{
     }
   }
 }
+
+//ARCHIVES/TAGS/CATEGORY
+.archives{
+    float:left;
+}
+
+.stub {
+    $stub-gutter: 1.4em;
+    $stub-image-padding: .7em;
+    $stub-image-width: 4em;
+    $stub-color: $base-font-color;
+    $stub-background: lighten($base-accent-color, 15);
+    $stub-detail-color: transparentize($stub-color, .5);
+    $stub-image-vert-alignment: top;
+
+    display: table;
+    width: 100%;
+    margin-bottom: $base-spacing;
+    padding-bottom: 1em;
+    border-bottom: 1px solid transparentize($stub-color, .9);
+
+    .stub-image,
+    .stub-content {
+        display: table-cell;
+        vertical-align: $stub-image-vert-alignment;
+    }
+
+    .stub-image {
+        padding-right: $stub-gutter;
+
+        > img {
+            width: $stub-image-width;
+            height: auto;
+            border-radius: $base-border-radius;
+            padding: $stub-image-padding;
+            background: $stub-background;
+            display: block;
+            max-width: none;
+        }
+
+        .stub-reverse-order & {
+            padding-right: 0;
+            padding-left: 10px;
+        }
+    }
+
+    .stub-content {
+        width: 100%;
+
+        h1 {
+            font-size: 1em;
+            margin-bottom: .5em;
+        }
+
+        p {
+            margin-bottom: .5em;
+        }
+
+        p.stub-detail {
+            font-style: italic;
+            font-size: .9em;
+            color: $stub-detail-color;
+        }
+    }
+}
+
 
 //FOOTER
 footer{

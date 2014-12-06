@@ -1,19 +1,22 @@
-{% extends 'index.html' %}
-{% block title %}all posts // {{ super() }}{% endblock title %}
-{% block pagetitle %}all posts{% endblock pagetitle %}
+{% extends 'base.html' %}
+{% block title %}All Posts // {{ super() }}{% endblock title %}
+{% block pagetitle %}All Posts{% endblock pagetitle %}
 {% block content %}
-<h1>All posts</h1>
+<section class="type-system-geometric archives">
+<h1>All Posts</h1>
 {% for article in dates %}
-    <a href="{{ SITEURL }}/{{ article.author.url }}" title="See posts by {{ article.author }}">
-        {% if article.author_gravatar %}
-            <img class="avatar" alt="{{ article.author }}" src="{{ article.author_gravatar }}">
-        {% endif %}
-    </a>
-    {% for tag in article.tags %}
-        <a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
-    {% endfor %}
-    <b>{{ article.date|strftime('%Y%m%d') }}</b>
-    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-    <p>{{ article.author }} in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></p>
+<article>
+<div class="stub">
+    <div class="stub-image">
+        <img src="{{ article.author_gravatar }}" alt="{{ article.author }}">
+    </div>
+    <div class="stub-content">
+        <h1><a href="{{ article.url }}">{{ article.title }}</a></h1>
+        <p>{{ article.summary }}</p>
+        <p class="stub-detail">{{ article.date|strftime('%Y%m%d') }}</p>
+    </div>
+</div>
+</article>
 {% endfor %}
+</section>
 {% endblock %}
