@@ -19,7 +19,7 @@
 				<h1><a href="{{ SITEURL }}/{{article.slug}}.html"><img class="top-icon" src="{{ SITEURL }}/theme/images/poly{{ loop.index0 % 8 }}0.png" alt="metatron polyhedron">{{ article.title|title }}</a></h1>
 				<p>
 				{% for tag in article.tags %}
-					<a href="{{ SITEURL }}/{{ tag }}.html">{{ tag }}</a>
+					<a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a>
 					{% if not loop.last %}|{% endif %}
 				{% endfor %}
 				</p>
