@@ -200,16 +200,21 @@ $default-layout-direction:RTL;
       font-size: 1.05em;
       content: 'Footnotes:';
       font-weight: bold;
+      counter-reset: my-footnote-counter;
     }
     .footnote-backref{
       color:transparent;
       &:before{
-        display:block;
-        @extend .fa;
+        display:inline;
+        // @extend .fa;
         // @extend .fa-long-arrow-up;
-        @extend .fa-level-down;
-        @include transform(rotate(180deg));
+        // @extend .fa-level-down;
+        // @include transform(rotate(180deg));
+        $footnote-number: counter(my-footnote-counter, decimal);
+        content: '[' $footnote-number ']';
+        counter-increment: my-footnote-counter;
         float:left;
+        padding-right:5px;
         color:$cyan;
       }
     }
