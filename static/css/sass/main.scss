@@ -187,8 +187,13 @@ $default-layout-direction:RTL;
       vertical-align: -.2em;
     }
   }
+  // I am treating markdown and rst footnotes differently.
+  // Markdown footnotes are as endnotes.
+  // Rst footnotes are inline citations and will probably be turned into asides later.
+  table.footnote{
 
-  .footnote{
+  }
+  div.footnote{
     hr{margin: 0px 0px 1em 0px;}
     ul{
       list-style: disc;
