@@ -23,6 +23,6 @@
 	{% endif %}
 	<p>[<a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>]
 	{% for tag in article.tags %}
-		<a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% if not loop.last %}|{% endif %}
+		<a class="" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% if not loop.last %} | {% endif %}
 	{% endfor %}
 {% endblock %}
