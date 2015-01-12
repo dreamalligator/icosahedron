@@ -2,33 +2,35 @@
 {% block content %}
 <section>
 	{% include 'header.html' %}
-	{% for page in PAGES %}
-		{% include 'post.html' %}
-	{% endfor %}
-	{% for article in articles %}
-		{% if loop.first %}
-			<hr>
-			<article class="type-system-geometric">
-			{% include 'article_content.html' %}
-			<hr>
-			<p>See <a href="{{ SITEURL }}/archives.html">ALL POSTS</a>.</p>
-			<hr>
-			</article>
-		{% else %}
-			<article class="type-system-geometric">
-				<h1><a href="{{ SITEURL }}/{{article.slug}}.html"><img class="top-icon" src="{{ SITEURL }}/theme/images/poly{{ loop.index0 % 8 }}0.png" alt="metatron polyhedron">{{ article.title|title }}</a></h1>
-				<p>
-				{% for tag in article.tags %}
-					<a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a>
-					{% if not loop.last %}|{% endif %}
-				{% endfor %}
-				</p>
-				<p>{{ article.summary }}</p>
-				<p>Filed under <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a> on <b> {{article.date|strftime('%Y%m%d') }}</b></p>
+	<div class='article-wrapper'>
+		{% for page in PAGES %}
+			{% include 'post.html' %}
+		{% endfor %}
+		{% for article in articles %}
+			{% if loop.first %}
 				<hr>
-			</article>
-		{% endif %}
-	{% endfor %}
+				<article class="type-system-geometric">
+				{% include 'article_content.html' %}
+				<hr>
+				<p>See <a href="{{ SITEURL }}/archives.html">ALL POSTS</a>.</p>
+				<hr>
+				</article>
+			{% else %}
+				<article class="type-system-geometric">
+					<h1><a href="{{ SITEURL }}/{{article.slug}}.html"><img class="top-icon" src="{{ SITEURL }}/theme/images/poly{{ loop.index0 % 8 }}0.png" alt="metatron polyhedron">{{ article.title|title }}</a></h1>
+					<p>
+					{% for tag in article.tags %}
+						<a href="{{ SITEURL }}/tag/{{ tag }}.html">{{ tag }}</a>
+						{% if not loop.last %}|{% endif %}
+					{% endfor %}
+					</p>
+					<p>{{ article.summary }}</p>
+					<p>Filed under <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a> on <b> {{article.date|strftime('%Y%m%d') }}</b></p>
+					<hr>
+				</article>
+			{% endif %}
+		{% endfor %}
+	</div>
 </section>
 {% include 'footer.html' %}
 {% endblock %}

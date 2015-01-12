@@ -9,22 +9,18 @@ $max-width: 2000px;
 $default-layout-direction:RTL;
 
 //FONTS
-//@import url(http://fonts.googleapis.com/css?family=Megrim);
 @font-face {
   font-family: 'Megrim';
   font-style: normal;
   font-weight: 400;
   src: local('Megrim'), url(https://themes.googleusercontent.com/static/fonts/megrim/v5/wEAANqPdhC-qap-OX73FcA.woff) format('woff');
 }
-//@import url(http://fonts.googleapis.com/css?family=Sanchez:400italic,400);
-//@import url(http://fonts.googleapis.com/css?family=Questrial);
 @font-face {
   font-family: 'Questrial';
   font-style: normal;
   font-weight: 400;
   src: local('Questrial'), local('Questrial-Regular'), url(https://themes.googleusercontent.com/static/fonts/questrial/v4/MYWJ4lYm5dbZ1UBuYox79D8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
-//@import url(http://fonts.googleapis.com/css?family=Exo);
 @font-face {
   font-family: 'Exo';
   font-style: normal;
@@ -33,17 +29,18 @@ $default-layout-direction:RTL;
 }
 
 //ARTICLES AND ABOUT US
+.article-wrapper{
+    @include clearfix;
+    @include span-columns(12);
+    @include media($medium-screen){
+        @include span-columns(8 of 12);
+    }
+    @include clearfix;
+}
 .type-system-geometric {
   $sans-serif: 'Questrial', sans-serif !global;
   //$serif: 'Sanchez', serif;
   $serif: 'Exo', serif !global;
-
-  @include clearfix;
-  @include span-columns(12);
-  @include media($medium-screen){
-    @include span-columns(8 of 12);
-  }
-  @include clearfix;
   text-align: left;
 
   audio{
@@ -211,10 +208,6 @@ $default-layout-direction:RTL;
       color:transparent;
       &:before{
         display:inline;
-        // @extend .fa;
-        // @extend .fa-long-arrow-up;
-        // @extend .fa-level-down;
-        // @include transform(rotate(180deg));
         $footnote-number: counter(my-footnote-counter, decimal);
         content: '[' $footnote-number ']';
         counter-increment: my-footnote-counter;
@@ -275,14 +268,12 @@ header{
   h1{
     font-family: 'Megrim', cursive;
     font-size:40px;
-
     @include media($medium-screen){
       font-size:60px;
     }
     @include media($large-screen){
       font-size:90px;
     }
-
   }
   h3{
     font-family:$sans-serif;

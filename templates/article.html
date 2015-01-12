@@ -8,13 +8,15 @@
 {% endblock %}
 {% block content %}
 {% include 'header.html' %}
-<article class="type-system-geometric">
-{% include 'article_content.html' %}
-<hr>
-{% include 'share.html' %}
-{% if DISQUS_SITENAME %}
-	{% include 'disqus.html' %}
-{% endif %}
-</article>
+<div class='article-wrapper'>
+	<article class="type-system-geometric">
+	{% include 'article_content.html' %}
+	<hr>
+	{% include 'share.html' %}
+	{% if DISQUS_SITENAME %}
+		{% include 'disqus.html' %}
+	{% endif %}
+	</article>
+</div>
 {% include 'footer.html' %}
 {% endblock %}
