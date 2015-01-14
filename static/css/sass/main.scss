@@ -28,6 +28,8 @@ $default-layout-direction:RTL;
   src: local('Exo Regular'), local('Exo-Regular'), url(https://themes.googleusercontent.com/static/fonts/exo/v2/wocyXRLWPo2Av-yUTmmbTA.woff) format('woff');
 }
 
+pre{word-wrap:break-word;}
+
 //ARTICLES AND ABOUT US
 .article-wrapper{
     @include clearfix;
